@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:property name="M_PI" value="3.14159"/> 
   <xacro:property name="laser_min_range" value="0.1"/>
   <xacro:property name="laser_max_range" value="200.0"/>
   <xacro:property name="horizontal_fov" value="70.4"/>
   <xacro:property name="vertical_fov" value="70.4"/>
-  <xacro:property name="ros_topic" value="scan"/>
+  <xacro:property name="ros_topic" value="livox/points"/>
   <xacro:property name="samples" value="10000"/>
   <xacro:property name="downsample" value="1"/>
   
@@ -18,6 +17,7 @@
           izz="0.01"/>
     </inertial>
   </xacro:macro>
+
   <xacro:macro name="Livox_Mid_gazebo_sensor" params="visualize:=True update_rate:=10 resolution:=0.002 noise_mean:=0.0 noise_stddev:=0.01 name:=livox">
     <gazebo reference="${name}">
       <sensor type="ray" name="laser_${name}">
@@ -31,14 +31,14 @@
               <horizontal>
                 <samples>100</samples>
                 <resolution>1</resolution>
-                <min_angle>${-horizontal_fov/360*M_PI}</min_angle>
-                <max_angle>${horizontal_fov/360*M_PI}</max_angle>
+                <min_angle>${-horizontal_fov/360*pi}</min_angle>
+                <max_angle>${horizontal_fov/360*pi}</max_angle>
               </horizontal>
               <vertical>
                 <samples>50</samples>
                 <resolution>1</resolution>
-                <min_angle>${-vertical_fov/360*M_PI}</min_angle>
-                <max_angle>${vertical_fov/360*M_PI}</max_angle>
+                <min_angle>${-vertical_fov/360*pi}</min_angle>
+                <max_angle>${vertical_fov/360*pi}</max_angle>
               </vertical>
             </scan>
             <range>
